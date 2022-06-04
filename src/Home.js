@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import heroImg from "./assets/images/heroimg.jpg";
+import heroImg from "./assets/images/heroSMALL.jpg";
 import {
   getPostsBySearch,
   getAllPosts,
@@ -28,26 +28,28 @@ function Home() {
     }
   }, [level, dispatch, debouncedSearch, search.length]);
   return (
-    <div className="flex flex-col justify-center items-center overflow-x-hidden">
-      <div className="text-center md:mt-0 w-full mx-4">
-        <div className="h-full xl:h-100v w-full flex flex-col items-center justify-center relative">
+    <header className="flex flex-col justify-center items-center overflow-x-hidden">
+      <div className="text-center md:mt-0 w-full mx-4 ">
+        <div
+          style={{ backgroundImage: `url(${heroImg})` }}
+          className="h-100v w-full flex flex-col items-center justify-center relative bg-no-repeat bg-fixed bg-cover bg-top"
+        >
           <div className="w-full h-full absolute top-0 left-0 bg-black opacity-60"></div>
           <div className="absolute text-white">
             <h1 className="font-bold text-2xl md:text-3xl xl:text-5xl md:my-12 my-6">
-              Welcome on <span className="text-orange-500">Strong Coders</span>
+              Welcome on <span className="text-dark-orange">Strong Coders</span>
             </h1>
             <h2 className="text-md mx-10 md:text-2xl md:my-12 m-6">
-              Platfrom where programmers are getting in their best shape
+              Website where programmers are getting their best shape
             </h2>
-            <button className="text-orange-500 border-2 px-4 py-2 md:text-2xl border-orange-500">
+            <button className="text-dark-orange border-2 px-4 py-2 md:text-2xl border-dark-orange">
               <Link to="/sign-up">Join us!</Link>
             </button>
           </div>
-          <img className="w-full h-full" src={heroImg} alt="hero img" />
         </div>
 
         <div className="flex flex-col xs:flex-row items-center mx-4 mt-5 ">
-          <label>Workouts level</label>
+          <label className="text-gray-300 ">Workouts level</label>
           <select
             className="shadow appearance-none border w-28 rounded  py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline  m-3 focus:border-black"
             name="level"
@@ -70,7 +72,7 @@ function Home() {
           <AllPosts />
         </div>
       </div>
-    </div>
+    </header>
   );
 }
 

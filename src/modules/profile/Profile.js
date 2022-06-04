@@ -28,7 +28,7 @@ function Profile() {
   };
 
   return (
-    <div className="m-5  mt-32 text-center">
+    <div className="text-center">
       <h3>Whaats's up {user && user?.user?.name}!</h3>
 
       {userPosts.length > 0 &&

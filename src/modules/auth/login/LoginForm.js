@@ -3,6 +3,7 @@ import { useNavigate, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { login } from "../../../redux/features/auth/authSlice";
+import { Input } from "../../../components/Input";
 
 function Form() {
   const navigate = useNavigate();
@@ -32,37 +33,37 @@ function Form() {
   };
 
   return (
-    <div className="flex flex-col justify-center items-center overflow-x-hidden mt-20">
+    <div className="flex flex-col justify-center items-center h-100v overflow-hidden ">
       <form
         onSubmit={handleSubmit}
-        className="flex flex-col justify-center items-center mt-3"
+        className="flex bg-dark-purple flex-col justify-center mt-20 rounded-3xl text-center items-center p-8 md:p-32 shadow-2xl "
       >
-        <label className="block text-gray-700 text-sm font-bold ">Email</label>
-        <input
-          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline m-1  focus:border-black"
+        <Input
           type="text"
-          placeholder="Email"
           name="email"
+          placeholder="Email"
           onChange={handleChange}
           value={formData.email}
+          label="Email"
         />
-        <label className="block text-gray-700 text-sm font-bold mt-4">
-          Password
-        </label>
-        <input
-          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline m-1 focus:border-black"
+        <Input
           type="password"
           name="password"
           placeholder="Password"
           onChange={handleChange}
           value={formData.password}
+          label="Password"
         />
+
         <input
-          className="bg-black  text-white my-5 py-2 px-5 rounded cursor-pointer"
+          className="bg-none border border-light-orange text-light-orange md:text-xl my-4 py-2 px-5 md:py-3 md:px-6 rounded cursor-pointer"
           type="submit"
           value="Login"
         />
-        <Link to="/sign-up">Don't have an account yet? </Link>
+        <Link className="text-light-orange mt-4 md:text-lg" to="/sign-up">
+          <p className="text-gray-300  ">Don't have an account yet?</p>
+          <p>Sign up!</p>
+        </Link>
       </form>
     </div>
   );

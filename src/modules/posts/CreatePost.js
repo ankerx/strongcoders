@@ -1,15 +1,14 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Button from "../../components/Button";
-import Input from "./components/Input";
 import { useDispatch, useSelector } from "react-redux";
 import { createPost } from "../../redux/features/posts/postsSlice";
-
+import { Input } from "../../components/Input";
+import { useForm } from "react-hook-form";
 function CreatePost() {
   const { user } = useSelector((state) => ({ ...state.auth }));
-  console.log(user);
-  const username = user?.name;
-  console.log(username);
+
+  const username = user?.user?.name;
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
@@ -34,14 +33,16 @@ function CreatePost() {
   return (
     <div className="flex flex-col justify-center mt-10">
       <h2 className="text-center mb-4 text-xl">Create workout</h2>
-      <form className="flex flex-col items-center m-2">
+      <form className="flex flex-col items-center m-2 bg-dark-purple p-8 ">
         <Input
+          label="Workout name"
+          value={formData.name}
           type="text"
           name="name"
           placeholder="Workout name"
           onChange={handleChange}
         />
-        <label>Workout level</label>
+        <label className="text-gray-200">Workout level</label>
 
         <select
           className="shadow appearance-none border  rounded w-80 py-3 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline  my-3 focus:border-black"
@@ -54,7 +55,7 @@ function CreatePost() {
           <option value="hard">Hard</option>
           <option value="pro">Pro</option>
         </select>
-        <label>Description</label>
+        <label className="text-gray-200">Description</label>
         <textarea
           placeholder="Describe your workout"
           onChange={handleChange}
@@ -62,7 +63,6 @@ function CreatePost() {
           name="desc"
           className="shadow appearance-none border   rounded w-80 py-3 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline my-3  focus:border-black"
         />
-        <Button onClick={addPost}>Add workout</Button>
       </form>
     </div>
   );

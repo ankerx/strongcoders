@@ -13,6 +13,7 @@ import CreatePost from "./modules/posts/CreatePost";
 import ProfileInfo from "./modules/profile/ProfileInfo";
 import UserPosts from "./modules/profile/UserPosts";
 import PostDetails from "./modules/posts/post/PostDetails";
+import { AddPost } from "./modules/posts/AddPost";
 function App() {
   const dispatch = useDispatch();
   const user = JSON.parse(localStorage.getItem("profile"));
@@ -23,16 +24,18 @@ function App() {
   return (
     <HashRouter>
       <Navbar />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/sign-up" element={<RegisterForm />} />
-        <Route path="/log-in" element={<LoginForm />} />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/profile-info" element={<ProfileInfo />} />
-        <Route path="/create-post" element={<CreatePost />} />
-        <Route path="/users" element={<UserPosts />} />
-        <Route path="/workout/:id" element={<PostDetails />} />
-      </Routes>
+      <div className="bg-light-purple ">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/sign-up" element={<RegisterForm />} />
+          <Route path="/log-in" element={<LoginForm />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/profile-info" element={<ProfileInfo />} />
+          <Route path="/create-post" element={<AddPost />} />
+          <Route path="/users" element={<UserPosts />} />
+          <Route path="/workout/:id" element={<PostDetails />} />
+        </Routes>
+      </div>
       <ToastContainer autoClose={2000} />
     </HashRouter>
   );

@@ -19,8 +19,10 @@ module.exports = {
         "100v": "100vh",
       },
       colors: {
-        "dark-purple": "#081A51",
-        "light-white": "rgba(255,255,255,0.17)",
+        "dark-purple": "#251D3A",
+        "light-purple": "#2A2550",
+        "dark-orange": "#E04D01",
+        "light-orange": "#FF7700",
       },
     },
     screens: {
