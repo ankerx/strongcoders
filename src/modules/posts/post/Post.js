@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { GoThumbsup } from "react-icons/go";
-import { likePost } from "../../../redux/api";
+import { likePost } from "../../../redux/features/posts/postsSlice";
 function Post({ name, desc, id, likes, author, level }) {
   const { user } = useSelector((state) => ({ ...state.auth }));
   const dispatch = useDispatch();

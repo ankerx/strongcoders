@@ -9,8 +9,6 @@ import LoginForm from "./modules/auth/login/LoginForm";
 import { Route, Routes, HashRouter } from "react-router-dom";
 import React, { useEffect } from "react";
 import Profile from "./modules/profile/Profile";
-import CreatePost from "./modules/posts/CreatePost";
-import ProfileInfo from "./modules/profile/ProfileInfo";
 import UserPosts from "./modules/profile/UserPosts";
 import PostDetails from "./modules/posts/post/PostDetails";
 import { AddPost } from "./modules/posts/AddPost";
@@ -30,7 +28,6 @@ function App() {
           <Route path="/sign-up" element={<RegisterForm />} />
           <Route path="/log-in" element={<LoginForm />} />
           <Route path="/profile" element={<Profile />} />
-          <Route path="/profile-info" element={<ProfileInfo />} />
           <Route path="/create-post" element={<AddPost />} />
           <Route path="/users" element={<UserPosts />} />
           <Route path="/workout/:id" element={<PostDetails />} />

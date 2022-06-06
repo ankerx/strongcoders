@@ -1,64 +1,105 @@
-import { useState } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import Button from "../../components/Button";
-import { useForm } from "react-hook-form";
+import { useDispatch, useSelector } from "react-redux";
+import { createPost } from "../../redux/features/posts/postsSlice";
 import { useNavigate } from "react-router-dom";
+import { Input } from "./components/Input";
+import { NumberInput } from "./components/NumberInput";
+import { MdDelete } from "react-icons/md";
 export const Exercises = () => {
   const navigate = useNavigate();
-  const {
-    register,
-    handleSubmit,
-    watch,
-    formState: { errors },
-  } = useForm();
-  const onSubmit = (form, e) => {
-    e.preventDefault();
-  };
+  const dispatch = useDispatch();
 
-  console.log(watch("test")); // watch input value by passing the name of it
+  const divRef = useRef();
+  const { post } = useSelector((state) => ({ ...state.posts }));
+
   const initialValues = {
     exerciseName: "",
     sets: 0,
     reps: 0,
   };
+  const scrollToBottom = useCallback(() => {
+    divRef.current.scrollIntoView({ behavior: "smooth" });
+  }, [divRef]);
+
   const [exercises, setExercises] = useState([initialValues]);
   console.log(exercises);
+  const object = {
+    ...post,
+    exercises: [...exercises],
+  };
+
+  const handleChange = (index, event) => {
+    let data = [...exercises];
+    data[index][event.target.name] = event.target.value;
+    setExercises(data);
+  };
   const addExercise = (event) => {
     event.preventDefault();
     setExercises([...exercises, initialValues]);
   };
+
+  useEffect(() => {
+    if (divRef.current) scrollToBottom();
+  }, [addExercise, scrollToBottom]);
+  const removeExercise = (index) => {
+    let data = [...exercises];
+    data.splice(index, 1);
+    setExercises(data);
+  };
+  const onSubmit = (event) => {
+    event.preventDefault();
+    console.log(exercises);
+    dispatch(createPost(object));
+    navigate("/");
+  };
+
   return (
     <form
-      className="flex flex-col items-center m-2"
-      onSubmit={handleSubmit(onSubmit)}
+      className="flex flex-col items-center m-2 lg:px-20   bg-dark-purple py-8 px-12 rounded-md"
+      onSubmit={onSubmit}
     >
-      <input className="text-black" name="test" {...register("test")} />
       {exercises.map((exercise, index) => {
         return (
-          <div className="flex ">
-            <input
-              ref={register()}
-              className="shadow w-40 appearance-none border-2 rounded  py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:ring-indigo-500 focus:border-indigo-500 md:text-lg m-4 mb-10"
+          <div
+            key={index}
+            className="flex flex-col items-center my-4 border-t-2 border-slate-700"
+          >
+            <Input
+              label="Exercise's name"
+              onChange={(event) => handleChange(index, event)}
+              value={exercises.exerciseName}
               type="text"
-              name={`exercise${index}`}
               placeholder="Exercise's name"
             />
-            <input
-              className="shadow w-20 appearance-none border-2 rounded  py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:ring-indigo-500 focus:border-indigo-500 md:text-lg m-4 mb-10"
-              type="text"
+            <NumberInput
+              label="Sets"
+              type="number"
               name="sets"
+              onChange={(event) => handleChange(index, event)}
+              value={exercises.sets}
               placeholder="Sets"
             />
-            <input
-              className="shadow w-20 appearance-none border-2 rounded  py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:ring-indigo-500 focus:border-indigo-500 md:text-lg   m-4 mb-10"
-              type="text"
+            <NumberInput
+              label="Reps"
+              type="number"
+              value={exercises.reps}
+              onChange={(event) => handleChange(index, event)}
               name="reps"
               placeholder="Reps"
             />
+            <button
+              className="mt-1 flex"
+              onClick={(e) => (e.preventDefault(), removeExercise(index))}
+            >
+              remove <MdDelete className="text-2xl" />
+            </button>
+            <div ref={divRef}></div>
           </div>
         );
       })}
-      <input value="Save" type="submit" />
       <Button onClick={addExercise}>Add exercise</Button>
+      {exercises.length > 0 && <Button type="submit">SUBMIT WORKOUT</Button>}
     </form>
   );
 };

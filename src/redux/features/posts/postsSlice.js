@@ -55,7 +55,7 @@ export const createPost = createAsyncThunk(
   async (formData, { rejectWithValue }) => {
     try {
       const response = await api.createPost(formData);
-
+      console.log(response);
       return response.data;
     } catch (error) {
       console.log(error);
@@ -68,7 +68,6 @@ export const deletePost = createAsyncThunk(
   async (postID, { rejectWithValue }) => {
     try {
       const response = await api.deletePost(postID);
-
       return response.data;
     } catch (error) {
       console.log(error);
@@ -81,7 +80,6 @@ export const likePost = createAsyncThunk(
   async (postID, { rejectWithValue }) => {
     try {
       const response = await api.likePost(postID);
-
       return response.data;
     } catch (error) {
       console.log(error);
@@ -91,11 +89,17 @@ export const likePost = createAsyncThunk(
 const postsSlice = createSlice({
   name: "posts",
   initialState: {
+    post: {},
     posts: [],
     users: [],
     userPosts: [],
     error: "",
     loading: false,
+  },
+  reducers: {
+    stepOne: (state, action) => {
+      state.post = action.payload;
+    },
   },
   extraReducers: {
     [getAllPosts.pending]: (state, action) => {
@@ -155,5 +159,5 @@ const postsSlice = createSlice({
     },
   },
 });
-
+export const { stepOne } = postsSlice.actions;
 export default postsSlice.reducer;

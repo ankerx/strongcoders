@@ -4,7 +4,7 @@ import { getPost } from "../../../redux/api";
 function PostDetails() {
   const { id } = useParams();
   const [post, setPost] = useState();
-  console.log(post?.desc);
+  console.log(post);
   const fetchPost = async () => {
     try {
       const { data } = await getPost(id);

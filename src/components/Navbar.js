@@ -61,7 +61,7 @@ function Navbar() {
         >
           <li
             onClick={() => setOpen(false)}
-            className="md:ml-8 text-xl md:my-0 my-7"
+            className="md:ml-8 lg:text-xl md:my-0 my-7"
           >
             <Link
               to="/"
@@ -74,7 +74,7 @@ function Navbar() {
             <>
               <li
                 onClick={() => setOpen(false)}
-                className="md:ml-8 text-xl md:my-0 my-7"
+                className="md:ml-8 lg:text-xl md:my-0 my-7"
               >
                 <Link
                   to="/profile"
@@ -88,7 +88,7 @@ function Navbar() {
 
           <li
             onClick={() => setOpen(false)}
-            className="md:ml-8 text-xl md:my-0 my-7 mr-10 "
+            className="md:ml-8 lg:text-xl md:my-0 my-7 mr-10 "
           >
             <Link
               to="/users"
@@ -103,7 +103,7 @@ function Navbar() {
               <div>
                 <button
                   onClick={() => setOpen(false)}
-                  className="md:ml-8 text-xl md:my-0  bg-dark-orange py-2 px-4 rounded-md text-white cursor-pointer hover:scale-90 ease-in-out duration-200"
+                  className="md:ml-8 lg:text-xl md:my-0  bg-dark-orange py-2 px-4 rounded-md text-white cursor-pointer hover:scale-90 ease-in-out duration-200"
                 >
                   <Link to="/create-post">Add post</Link>
                 </button>
@@ -113,7 +113,7 @@ function Navbar() {
                   logout();
                   setOpen(false);
                 }}
-                className="md:ml-8 text-xl md:my-0 my-7 text-white cursor-pointer hover:text-dark-orange ease-in-out duration-200"
+                className="md:ml-8 lg:text-xl md:my-0 my-7 text-white cursor-pointer hover:text-dark-orange ease-in-out duration-200"
               >
                 Logout
               </button>
@@ -121,7 +121,7 @@ function Navbar() {
           ) : (
             <button
               onClick={() => setOpen(false)}
-              className="md:ml-8 text-xl md:my-0 my-7 text-white cursor-pointer hover:text-dark-orange ease-in-out duration-200"
+              className="md:ml-8 lg:text-xl md:my-0 my-7 text-white cursor-pointer hover:text-dark-orange ease-in-out duration-200"
             >
               <Link to="/log-in">Login</Link>
             </button>

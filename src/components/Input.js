@@ -5,7 +5,7 @@ export const Input = (props) => {
         {props.label}
       </label>
       <input
-        className="shadow w-full appearance-none border-2 rounded  py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:ring-indigo-500 focus:border-indigo-500 md:text-lg   m-4 mb-10 "
+        className="shadow w-60 max-w-sm appearance-none border-2 rounded  py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:ring-indigo-500 focus:border-indigo-500 md:text-lg   m-4 mb-10 "
         type={props.type}
         placeholder={props.placeholder}
         name={props.name}

@@ -10,10 +10,14 @@ import UserPost from "./UserPost";
 function Profile() {
   const { user } = useSelector((state) => ({ ...state.auth }));
   const { userPosts, loading } = useSelector((state) => ({ ...state.posts }));
-  console.log(userPosts);
-
+  const [posts, setPosts] = useState(userPosts);
+  console.log(posts);
   const dispatch = useDispatch();
-  const userID = user?._id;
+  const userID = user?.user?._id;
+  const handleDelete = (id) => {
+    dispatch(deletePost(id));
+    setPosts(posts.filter((post) => post._id !== id));
+  };
 
   useEffect(() => {
     if (userID) {
@@ -23,26 +27,23 @@ function Profile() {
   if (loading) {
     return <Spinner />;
   }
-  const handleDelete = (id) => {
-    dispatch(deletePost(id));
-  };
 
   return (
-    <div className="text-center">
-      <h3>Whaats's up {user && user?.user?.name}!</h3>
-
-      {userPosts.length > 0 &&
-        userPosts.map((post) => (
-          <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3 ">
+    <div className="text-center pt-20 f text-white min-h-screen	">
+      <h3 className="mt-5">Whaats's up {user && user?.user?.name}!</h3>
+      <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 ">
+        {posts.length > 0 &&
+          posts.map((post) => (
             <UserPost
               key={post._id}
+              desc={post.desc}
               id={post._id}
               name={post.name}
               handleDelete={handleDelete}
             />
-          </div>
-        ))}
-      {userPosts.length === 0 && (
+          ))}
+      </div>
+      {posts.length === 0 && (
         <button>
           <Link to="/create-post">Add your first post!</Link>
         </button>
