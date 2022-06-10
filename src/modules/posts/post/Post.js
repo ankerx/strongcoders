@@ -9,7 +9,7 @@ function Post({ name, desc, id, likes, author, level }) {
   const [like, setLike] = useState(likes.length);
   const [isLiked, setIsLiked] = useState(false);
   const userID = user?.user?._id;
-  console.log(like);
+
   useEffect(() => {
     setIsLiked(likes.includes(userID));
   }, [likes, userID]);

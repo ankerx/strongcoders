@@ -2,80 +2,88 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { register } from "../../../redux/features/auth/authSlice";
+import { registerUser } from "../../../redux/features/auth/authSlice";
+import { yupResolver } from "@hookform/resolvers/yup";
 
+import { useForm } from "react-hook-form";
+import * as yup from "yup";
+import axios from "axios";
+const schema = yup.object().shape({
+  name: yup.string().min(3).max(12).required(),
+  email: yup.string().email().required(),
+  password: yup.string().min(4).max(15).required(),
+});
 function Form() {
+  const {
+    watch,
+    formState: { errors },
+    register,
+    handleSubmit,
+  } = useForm({
+    resolver: yupResolver(schema),
+  });
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { message } = useSelector((state) => ({ ...state.auth }));
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    password: "",
-  });
   useEffect(() => {
     message && toast.error(message);
   }, [message]);
-  const { name, email, password } = formData;
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (name && email && password) {
-      dispatch(register({ formData, navigate, toast }));
-    }
-  };
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
+  const onSubmit = (formData) => {
+    console.log(formData);
+    dispatch(registerUser({ formData, navigate, toast }));
   };
 
+  console.log(errors);
+
   return (
-    <div className="flex flex-col justify-center items-center overflow-x-hidden mt-20">
+    <div className="flex flex-col justify-center items-center h-100v overflow-hidden">
       <form
-        onSubmit={handleSubmit}
-        className="flex flex-col justify-center items-center mt-3"
+        onSubmit={handleSubmit(onSubmit)}
+        className="flex bg-dark-purple flex-col justify-center mt-20 rounded-3xl text-center items-center p-8 md:px-32 md:py-14 shadow-2xl "
       >
-        <label className="block text-gray-700 mt-4 text-sm font-bold ">
+        <label className="block text-gray-300 text-md mt-4 md:text-lg font-bold ">
           Username
         </label>
         <input
-          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline m-2"
+          className="shadow w-60 max-w-sm appearance-none border-2 rounded  py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:ring-indigo-500 focus:border-indigo-500 md:text-lg   mx-4 mt-2  "
           type="text"
           placeholder="Username"
           name="name"
-          onChange={handleChange}
-          value={formData.name}
+          {...register("name")}
         />
-        <label className="block text-gray-700 text-sm mt-4 font-bold ">
+        <p className="text-red-500 mb-2">{errors.name?.message}</p>
+        <label className="block text-gray-300 text-md mt-4 md:text-lg font-bold ">
           Email
         </label>
         <input
-          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline m-2"
+          className="shadow w-60 max-w-sm appearance-none border-2 rounded  py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:ring-indigo-500 focus:border-indigo-500 md:text-lg   mx-4 mt-2 "
           type="text"
           placeholder="Email"
           name="email"
-          onChange={handleChange}
-          value={formData.email}
+          {...register("email")}
         />
-        <label className="block text-gray-700 text-sm font-bold mt-4">
+        <p className="text-red-500 mt-1 mb-2">{errors.email?.message}</p>
+        <label className="block text-gray-300 mt-4 text-md md:text-lg font-bold ">
           Password
         </label>
         <input
-          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline m-2"
+          className="shadow w-60 max-w-sm appearance-none border-2 rounded  py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:ring-indigo-500 focus:border-indigo-500 md:text-lg   mx-4 mt-2 "
           type="password"
-          name="password"
           placeholder="Password"
-          onChange={handleChange}
-          value={formData.password}
+          name="password"
+          {...register("password")}
         />
+        <p className="text-red-500 mt-1 mb-2">{errors.password?.message}</p>
         <input
-          className="bg-black  text-white my-5 py-2 px-5 rounded cursor-pointer"
+          className="bg-none border border-light-orange text-light-orange md:text-xl my-4 py-2 px-5 md:py-3 md:px-6 rounded cursor-pointer"
           type="submit"
           value="Sign up"
         />
-        <Link to="/log-in">Already have an account?</Link>
+        <Link className="text-light-orange mt-2 md:text-lg" to="/log-in">
+          <p className="text-gray-300  ">Already have an account?</p>
+          <p>Log in!</p>
+        </Link>
       </form>
     </div>
   );

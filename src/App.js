@@ -9,9 +9,10 @@ import LoginForm from "./modules/auth/login/LoginForm";
 import { Route, Routes, HashRouter } from "react-router-dom";
 import React, { useEffect } from "react";
 import Profile from "./modules/profile/Profile";
-import UserPosts from "./modules/profile/UserPosts";
 import PostDetails from "./modules/posts/post/PostDetails";
-import { AddPost } from "./modules/posts/AddPost";
+
+import Users from "./modules/profile/Users";
+import { AddPost } from "./modules/posts/post/createPost/AddPost";
 function App() {
   const dispatch = useDispatch();
   const user = JSON.parse(localStorage.getItem("profile"));
@@ -29,7 +30,7 @@ function App() {
           <Route path="/log-in" element={<LoginForm />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/create-post" element={<AddPost />} />
-          <Route path="/users" element={<UserPosts />} />
+          <Route path="/users" element={<Users />} />
           <Route path="/workout/:id" element={<PostDetails />} />
         </Routes>
       </div>

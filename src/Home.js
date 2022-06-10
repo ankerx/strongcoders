@@ -6,7 +6,6 @@ import {
   getAllPosts,
 } from "./redux/features/posts/postsSlice";
 import AllPosts from "./modules/posts/AllPosts";
-
 import useDebounce from "./core/hooks/useDebounce";
 import { Link } from "react-router-dom";
 function Home() {
@@ -16,6 +15,7 @@ function Home() {
   const handleChange = (e) => {
     setLevel(e.target.value);
   };
+  const user = JSON.parse(localStorage.getItem("profile"));
   const handleQuery = (e) => {
     setSearch(e.target.value);
   };
@@ -26,7 +26,7 @@ function Home() {
     } else {
       dispatch(getPostsBySearch({ debouncedSearch, level }));
     }
-  }, [level, dispatch, debouncedSearch, search.length]);
+  }, [level, dispatch, debouncedSearch]);
   return (
     <header className="flex flex-col justify-center items-center overflow-x-hidden">
       <div className="text-center md:mt-0 w-full mx-4 ">
@@ -35,16 +35,26 @@ function Home() {
           className="h-100v w-full flex flex-col items-center justify-center relative bg-no-repeat bg-fixed bg-cover bg-top"
         >
           <div className="w-full h-full absolute top-0 left-0 bg-black opacity-60"></div>
-          <div className="absolute text-white">
+          <div className="absolute  text-white">
             <h1 className="font-bold text-2xl md:text-3xl xl:text-5xl md:my-12 my-6">
               Welcome on <span className="text-dark-orange">Strong Coders</span>
             </h1>
-            <h2 className="text-md mx-10 md:text-2xl md:my-12 m-6">
-              Website where programmers are getting their best shape
+            <h2 className="text-md  mx-10 md:text-2xl lg:text-3xl md:my-14 md:mx-0 m-6">
+              Place where programmers are getting their best shape
             </h2>
-            <button className="text-dark-orange border-2 px-4 py-2 md:text-2xl border-dark-orange">
-              <Link to="/sign-up">Join us!</Link>
-            </button>
+            {user ? (
+              <Link to="/create-post">
+                <button className="bg-dark-orange  rounded-md px-4 py-2 md:px-7  md:py-3 xl:text-2xl text-white">
+                  Add workout!
+                </button>
+              </Link>
+            ) : (
+              <Link to="/sign-up">
+                <button className="bg-dark-orange  rounded-md px-4 py-2 md:px-7  md:py-3 xl:text-2xl text-white">
+                  Join us!
+                </button>
+              </Link>
+            )}
           </div>
         </div>
 

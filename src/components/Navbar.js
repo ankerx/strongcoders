@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setLogout } from "../redux/features/auth/authSlice";
 import { setUser } from "../redux/features/auth/authSlice";
 import { useEffect, useState } from "react";
-
+import strong from "../assets/images/logo.png";
 function Navbar() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -21,14 +21,19 @@ function Navbar() {
 
   return (
     <nav className="shadow-md w-full z-10 absolute top-0 left-0 ">
-      <div className="flex items-center bg-black justify-between py-4 md:px-10 px-7">
+      <div className="flex items-center bg-black justify-between md:px-10  px-7">
         <div
           className="font-bold  cursor-pointer flex items-center 
       text-gray-800"
         >
-          <span className="text-2xl text-dark-orange mr-1 pt-2">
+          <div className="w-20 md:w-24">
+            <Link to="/">
+              <img src={strong} />
+            </Link>
+          </div>
+          {/* <span className="text-2xl text-dark-orange mr-1 pt-2">
             <Link to="/"> Strong Coders</Link>
-          </span>
+          </span> */}
         </div>
         <button
           className="flex cursor-pointer md:hidden  flex-col h-12 w-12 justify-center items-center group"
@@ -101,12 +106,15 @@ function Navbar() {
           {user ? (
             <>
               <div>
-                <button
-                  onClick={() => setOpen(false)}
-                  className="md:ml-8 lg:text-xl md:my-0  bg-dark-orange py-2 px-4 rounded-md text-white cursor-pointer hover:scale-90 ease-in-out duration-200"
-                >
-                  <Link to="/create-post">Add post</Link>
-                </button>
+                <Link to="/create-post">
+                  <button
+                    onClick={() => setOpen(false)}
+                    className="md:ml-8 lg:text-xl md:my-0  bg-dark-orange py-2 px-4 rounded-md text-white cursor-pointer hover:scale-90 ease-in-out duration-200"
+                  >
+                    {" "}
+                    Add post
+                  </button>
+                </Link>
               </div>
               <button
                 onClick={() => {

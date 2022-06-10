@@ -101,62 +101,78 @@ const postsSlice = createSlice({
       state.post = action.payload;
     },
   },
-  extraReducers: {
-    [getAllPosts.pending]: (state, action) => {
-      state.loading = true;
-    },
-    [getAllPosts.fulfilled]: (state, action) => {
-      state.loading = false;
-      state.posts = action.payload;
-    },
-    [getAllPosts.rejected]: (state, action) => {
-      state.loading = false;
-      state.error = action.payload.message;
-    },
-    [getUserPosts.pending]: (state, action) => {
-      state.loading = true;
-    },
-    [getUserPosts.fulfilled]: (state, action) => {
-      state.loading = false;
-      state.userPosts = action.payload;
-    },
-    [getUserPosts.rejected]: (state, action) => {
-      state.loading = false;
-      state.error = action.payload.message;
-    },
-    [createPost.pending]: (state, action) => {
-      state.loading = true;
-    },
-    [createPost.fulfilled]: (state, action) => {
-      state.loading = false;
-      state.userPosts = action.payload;
-    },
-    [createPost.rejected]: (state, action) => {
-      state.loading = false;
-      state.error = action.payload.message;
-    },
-    [getPostsBySearch.pending]: (state, action) => {
-      state.loading = true;
-    },
-    [getPostsBySearch.fulfilled]: (state, action) => {
-      state.loading = false;
-      state.posts = action.payload;
-    },
-    [getPostsBySearch.rejected]: (state, action) => {
-      state.loading = false;
-      state.error = action.payload.message;
-    },
-    [getUsers.pending]: (state, action) => {
-      state.loading = true;
-    },
-    [getUsers.fulfilled]: (state, action) => {
-      state.loading = false;
-      state.users = action.payload;
-    },
-    [getUsers.rejected]: (state, action) => {
-      state.loading = false;
-      state.error = action.payload.message;
-    },
+  extraReducers: (builder) => {
+    builder
+      .addCase(getAllPosts.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(getAllPosts.fulfilled, (state, action) => {
+        state.loading = false;
+        state.posts = action.payload;
+      })
+      .addCase(getAllPosts.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload.message;
+      })
+      .addCase(getUserPosts.pending, (state, action) => {
+        state.loading = true;
+      })
+      .addCase(getUserPosts.fulfilled, (state, action) => {
+        state.loading = false;
+        state.userPosts = action.payload;
+      })
+      .addCase(getUserPosts.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload.message;
+      })
+      .addCase(createPost.pending, (state, action) => {
+        state.loading = true;
+      })
+      .addCase(createPost.fulfilled, (state, action) => {
+        state.loading = false;
+        state.userPosts = action.payload;
+      })
+      .addCase(createPost.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload.message;
+      })
+      .addCase(getPostsBySearch.pending, (state, action) => {
+        state.loading = true;
+      })
+      .addCase(getPostsBySearch.fulfilled, (state, action) => {
+        state.loading = false;
+        state.posts = action.payload;
+      })
+      .addCase(getPostsBySearch.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload.message;
+      })
+      .addCase(getUsers.pending, (state, action) => {
+        state.loading = true;
+      })
+      .addCase(getUsers.fulfilled, (state, action) => {
+        state.loading = false;
+        state.users = action.payload;
+      })
+      .addCase(getUsers.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload.message;
+      })
+      .addCase(deletePost.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(deletePost.fulfilled, (state, action) => {
+        state.loading = false;
+        state.error = false;
+        state.userPosts = state.userPosts.filter(
+          (post) => post._id !== action.payload
+        );
+      })
+
+      .addCase(deletePost.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload.message;
+      });
   },
 });
 export const { stepOne } = postsSlice.actions;

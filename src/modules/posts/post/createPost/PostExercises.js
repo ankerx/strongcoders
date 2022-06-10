@@ -1,26 +1,29 @@
-import { useState, useEffect, useRef, useCallback } from "react";
-import Button from "../../components/Button";
+import { useState, useEffect, useRef, useCallback, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { createPost } from "../../redux/features/posts/postsSlice";
 import { useNavigate } from "react-router-dom";
-import { Input } from "./components/Input";
-import { NumberInput } from "./components/NumberInput";
 import { MdDelete } from "react-icons/md";
-export const Exercises = () => {
+import { Input } from "../../../../components/Input";
+import { createPost } from "../../../../redux/features/posts/postsSlice";
+import Button from "../../../../components/Button";
+import { NumberInput } from "../../components/NumberInput";
+export const PostExercises = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const divRef = useRef();
   const { post } = useSelector((state) => ({ ...state.posts }));
 
-  const initialValues = {
-    exerciseName: "",
-    sets: 0,
-    reps: 0,
-  };
+  const initialValues = useMemo(
+    () => ({
+      exerciseName: "",
+      sets: 0,
+      reps: 0,
+    }),
+    []
+  );
   const scrollToBottom = useCallback(() => {
     divRef.current.scrollIntoView({ behavior: "smooth" });
-  }, [divRef]);
+  }, []);
 
   const [exercises, setExercises] = useState([initialValues]);
   console.log(exercises);
@@ -34,14 +37,18 @@ export const Exercises = () => {
     data[index][event.target.name] = event.target.value;
     setExercises(data);
   };
-  const addExercise = (event) => {
-    event.preventDefault();
-    setExercises([...exercises, initialValues]);
-  };
+  const addExercise = useCallback(
+    (event) => {
+      event.preventDefault();
+      setExercises([...exercises, initialValues]);
+    },
+    [exercises, initialValues]
+  );
 
   useEffect(() => {
     if (divRef.current) scrollToBottom();
   }, [addExercise, scrollToBottom]);
+
   const removeExercise = (index) => {
     let data = [...exercises];
     data.splice(index, 1);
@@ -71,6 +78,7 @@ export const Exercises = () => {
               value={exercises.exerciseName}
               type="text"
               placeholder="Exercise's name"
+              name="exerciseName"
             />
             <NumberInput
               label="Sets"
@@ -90,7 +98,10 @@ export const Exercises = () => {
             />
             <button
               className="mt-1 flex"
-              onClick={(e) => (e.preventDefault(), removeExercise(index))}
+              onClick={(e) => {
+                e.preventDefault();
+                removeExercise(index);
+              }}
             >
               remove <MdDelete className="text-2xl" />
             </button>
@@ -99,6 +110,7 @@ export const Exercises = () => {
         );
       })}
       <Button onClick={addExercise}>Add exercise</Button>
+
       {exercises.length > 0 && <Button type="submit">SUBMIT WORKOUT</Button>}
     </form>
   );

@@ -29,9 +29,9 @@ export const login = createAsyncThunk(
     }
   }
 );
-export const register = createAsyncThunk(
+export const registerUser = createAsyncThunk(
   "auth/register",
-  async ({ formData, navigate, toast }, { rejectWithValue }) => {
+  async ({ formData, toast, navigate }, { rejectWithValue }) => {
     try {
       const response = await api.registerUser(formData);
       toast.success("Account created!");
@@ -44,6 +44,7 @@ export const register = createAsyncThunk(
           error.response.data.message) ||
         error.message ||
         error.toString();
+      console.log(message);
       return rejectWithValue(message);
     }
   }
@@ -58,6 +59,7 @@ export const uploadImage = createAsyncThunk(
       const response = await api.uploadImage(userID, { image });
       console.log(userID);
       console.log(image);
+      return response;
     } catch (error) {
       console.log(error);
     }
@@ -83,16 +85,16 @@ export const authSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(register.pending, (state) => {
+      .addCase(registerUser.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(register.fulfilled, (state, action) => {
+      .addCase(registerUser.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
         state.user = action.payload;
         localStorage.setItem("profile", JSON.stringify({ ...action.payload }));
       })
-      .addCase(register.rejected, (state, action) => {
+      .addCase(registerUser.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;

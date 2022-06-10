@@ -1,6 +1,6 @@
 function Spinner() {
   return (
-    <div className="text-center mt-20">
+    <div className="text-center pt-20">
       <svg
         role="status"
         className="inline w-14 h-14 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-purple-400"
