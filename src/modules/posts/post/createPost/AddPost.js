@@ -17,9 +17,9 @@ export const AddPost = () => {
     username: user?.user?.name,
   });
 
-  // if (!formData.username) {
-  //   setFormData({ ...formData, username: user?.user?.name });
-  // }
+  if (!formData.username) {
+    setFormData({ ...formData, username: user?.user?.name });
+  }
   // const validate = (formData) => {
   //   let errors = {};
   //   if (!formData.name) {

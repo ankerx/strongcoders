@@ -100,6 +100,11 @@ const postsSlice = createSlice({
     stepOne: (state, action) => {
       state.post = action.payload;
     },
+    removePost: (state, action) => {
+      state.userPosts = state.userPosts.filter(
+        (post) => post._id !== action.payload
+      );
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -164,9 +169,6 @@ const postsSlice = createSlice({
       .addCase(deletePost.fulfilled, (state, action) => {
         state.loading = false;
         state.error = false;
-        state.userPosts = state.userPosts.filter(
-          (post) => post._id !== action.payload
-        );
       })
 
       .addCase(deletePost.rejected, (state, action) => {
@@ -175,5 +177,5 @@ const postsSlice = createSlice({
       });
   },
 });
-export const { stepOne } = postsSlice.actions;
+export const { stepOne, removePost } = postsSlice.actions;
 export default postsSlice.reducer;

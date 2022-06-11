@@ -5,6 +5,7 @@ import Spinner from "../../components/Spinner";
 import {
   getUserPosts,
   deletePost,
+  removePost,
 } from "../../redux/features/posts/postsSlice";
 import UserPost from "./UserPost";
 function Profile() {
@@ -15,8 +16,8 @@ function Profile() {
   const dispatch = useDispatch();
   const userID = user?.user?._id;
   const handleDelete = (id) => {
-    // dispatch(deletePost(id));
-    console.log(id);
+    dispatch(deletePost(id));
+    dispatch(removePost(id));
   };
 
   useEffect(() => {
@@ -30,7 +31,10 @@ function Profile() {
 
   return (
     <div className="text-center pt-20 pb-10 text-white min-h-screen	">
-      <h2 className="mt-5">Whaats's up {user && user?.user?.name}!</h2>
+      <h2 className="my-5 text-xl">
+        Whaats's up{" "}
+        <span className="text-light-orange">{user && user?.user?.name}</span>!
+      </h2>
       <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 ">
         {userPosts?.length > 0 &&
           userPosts?.map((post) => (
@@ -44,7 +48,7 @@ function Profile() {
           ))}
       </div>
       {userPosts?.length === 0 && (
-        <button>
+        <button className="text-light-orange">
           <Link to="/create-post">Add your first post!</Link>
         </button>
       )}

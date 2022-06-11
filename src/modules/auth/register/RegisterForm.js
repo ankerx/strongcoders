@@ -52,7 +52,7 @@ function Form() {
           name="name"
           {...register("name")}
         />
-        <p className="text-red-500 mb-2">{errors.name?.message}</p>
+        <p className="text-red-500 mt-1 mb-2">{errors.name?.message}</p>
         <label className="block text-gray-300 text-md mt-4 md:text-lg font-bold ">
           Email
         </label>

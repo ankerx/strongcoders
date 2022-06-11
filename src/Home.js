@@ -28,8 +28,8 @@ function Home() {
     }
   }, [level, dispatch, debouncedSearch]);
   return (
-    <header className="flex flex-col justify-center items-center overflow-x-hidden">
-      <div className="text-center md:mt-0 w-full mx-4 ">
+    <>
+      <header className="flex flex-col text-center justify-center items-center overflow-x-hidden">
         <div
           style={{ backgroundImage: `url(${heroImg})` }}
           className="h-100v w-full flex flex-col items-center justify-center relative bg-no-repeat bg-fixed bg-cover bg-top"
@@ -57,32 +57,31 @@ function Home() {
             )}
           </div>
         </div>
-
-        <div className="flex flex-col xs:flex-row items-center mx-4 mt-5 ">
-          <label className="text-gray-300 ">Workouts level</label>
-          <select
-            className="shadow appearance-none border w-28 rounded  py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline  m-3 focus:border-black"
-            name="level"
-            onChange={(e) => handleChange(e)}
-          >
-            <option value="all">All</option>
-            <option value="easy">Easy</option>
-            <option value="medium">Medium</option>
-            <option value="hard">Hard</option>
-            <option value="pro">Pro</option>
-          </select>
-          <input
-            className="shadow appearance-none border rounded w-46 md:w-1/3 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline m-1  focus:border-black"
-            placeholder="Search for workout"
-            value={search}
-            onChange={(e) => handleQuery(e)}
-          />
-        </div>
-        <div className="min-h-[80vh]">
-          <AllPosts />
-        </div>
+      </header>
+      <div className="flex flex-col xs:flex-row items-center mx-4 mt-5 ">
+        <label className="text-gray-300 ">Workouts level</label>
+        <select
+          className="shadow appearance-none border w-28 rounded  py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline  m-3 focus:border-black"
+          name="level"
+          onChange={(e) => handleChange(e)}
+        >
+          <option value="all">All</option>
+          <option value="easy">Easy</option>
+          <option value="medium">Medium</option>
+          <option value="hard">Hard</option>
+          <option value="pro">Pro</option>
+        </select>
+        <input
+          className="shadow appearance-none border rounded w-46 md:w-1/3 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline m-1  focus:border-black"
+          placeholder="Search for workout"
+          value={search}
+          onChange={(e) => handleQuery(e)}
+        />
       </div>
-    </header>
+      <section className="min-h-[80vh] text-center mx-8">
+        <AllPosts />
+      </section>
+    </>
   );
 }
 
