@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Button from "../../../../components/Button";
+import { Transition } from "../../../../components/Transition";
 import { stepOne } from "../../../../redux/features/posts/postsSlice";
 import { PostExercises } from "./PostExercises";
 import { PostInfo } from "./PostInfo";
@@ -34,37 +35,39 @@ export const AddPost = () => {
   //   setFormErrors(validate(formData));
   // }, [formData]);
   return (
-    <div className="min-h-screen flex items-center justify-center">
-      <div className="flex flex-col items-center justify-center pt-10 text-white  overflow-x-hidden mx-4 ">
-        <div className="text-center mt-14 ">
-          <h1 className="text-xl">{formTitle[page]}</h1>
-          {page === 0 ? (
-            <PostInfo formData={formData} setFormData={setFormData} />
-          ) : (
-            <PostExercises />
-          )}
-          <Button
-            disabled={page === 0}
-            onClick={() => setPage((prev) => prev - 1)}
-          >
-            Prev
-          </Button>
-          <Button
-            disabled={page === 1}
-            onClick={() => {
-              if (page === 0) {
-                dispatch(stepOne(formData));
-                setPage((prev) => prev + 1);
-              }
-            }}
-          >
-            Next
-          </Button>
-          {/* {formErrors.name && (
+    <Transition>
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="flex flex-col items-center justify-center pt-10 text-white  overflow-x-hidden mx-4 ">
+          <div className="text-center mt-14 ">
+            <h1 className="text-xl">{formTitle[page]}</h1>
+            {page === 0 ? (
+              <PostInfo formData={formData} setFormData={setFormData} />
+            ) : (
+              <PostExercises />
+            )}
+            <Button
+              disabled={page === 0}
+              onClick={() => setPage((prev) => prev - 1)}
+            >
+              Prev
+            </Button>
+            <Button
+              disabled={page === 1}
+              onClick={() => {
+                if (page === 0) {
+                  dispatch(stepOne(formData));
+                  setPage((prev) => prev + 1);
+                }
+              }}
+            >
+              Next
+            </Button>
+            {/* {formErrors.name && (
             <p className="text-red-500 text-sm">{formErrors.name}</p>
           )} */}
+          </div>
         </div>
       </div>
-    </div>
+    </Transition>
   );
 };

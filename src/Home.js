@@ -8,6 +8,7 @@ import {
 import AllPosts from "./modules/posts/AllPosts";
 import useDebounce from "./core/hooks/useDebounce";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 function Home() {
   const dispatch = useDispatch();
   const [search, setSearch] = useState("");
@@ -35,11 +36,21 @@ function Home() {
           className="h-100v w-full flex flex-col items-center justify-center relative bg-no-repeat bg-fixed bg-cover bg-top"
         >
           <div className="w-full h-full absolute top-0 left-0 bg-black opacity-60"></div>
-          <div className="absolute  text-white">
+          <motion.div
+            animate={{ opacity: 1 }}
+            initial={{ opacity: 0 }}
+            transition={{ from: 0, duration: 1 }}
+            className="absolute  text-white"
+          >
             <h1 className="font-bold text-2xl md:text-3xl xl:text-5xl md:my-12 my-6">
               Welcome on <span className="text-dark-orange">Strong Coders</span>
             </h1>
-            <h2 className="text-md  mx-10 md:text-2xl lg:text-3xl md:my-14 md:mx-0 m-6">
+            <h2
+              animate={{ opacity: 1 }}
+              transition={{ from: 0, duration: 1, delay: 0.5 }}
+              initial={{ opacity: 0 }}
+              className="text-md  mx-10 md:text-2xl lg:text-3xl md:my-14 md:mx-0 m-6"
+            >
               Place where programmers are getting their best shape
             </h2>
             {user ? (
@@ -55,7 +66,7 @@ function Home() {
                 </button>
               </Link>
             )}
-          </div>
+          </motion.div>
         </div>
       </header>
       <div className="flex flex-col xs:flex-row items-center mx-4 mt-5 ">

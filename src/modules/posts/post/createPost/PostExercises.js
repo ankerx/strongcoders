@@ -6,6 +6,7 @@ import { Input } from "../../../../components/Input";
 import { createPost } from "../../../../redux/features/posts/postsSlice";
 import Button from "../../../../components/Button";
 import { NumberInput } from "../../components/NumberInput";
+import { SwipeTransition, Transition } from "../../../../components/Transition";
 export const PostExercises = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -62,56 +63,58 @@ export const PostExercises = () => {
   };
 
   return (
-    <form
-      className="flex flex-col items-center m-2 lg:px-20   bg-dark-purple py-8 px-12 rounded-md"
-      onSubmit={onSubmit}
-    >
-      {exercises.map((exercise, index) => {
-        return (
-          <div
-            key={index}
-            className="flex flex-col items-center my-4 border-t-2 border-slate-700"
-          >
-            <Input
-              label="Exercise's name"
-              onChange={(event) => handleChange(index, event)}
-              value={exercises.exerciseName}
-              type="text"
-              placeholder="Exercise's name"
-              name="exerciseName"
-            />
-            <NumberInput
-              label="Sets"
-              type="number"
-              name="sets"
-              onChange={(event) => handleChange(index, event)}
-              value={exercises.sets}
-              placeholder="Sets"
-            />
-            <NumberInput
-              label="Reps"
-              type="number"
-              value={exercises.reps}
-              onChange={(event) => handleChange(index, event)}
-              name="reps"
-              placeholder="Reps"
-            />
-            <button
-              className="mt-1 flex"
-              onClick={(e) => {
-                e.preventDefault();
-                removeExercise(index);
-              }}
+    <SwipeTransition>
+      <form
+        className="flex flex-col items-center m-2 lg:px-20   bg-dark-purple py-8 px-12 rounded-md"
+        onSubmit={onSubmit}
+      >
+        {exercises.map((exercise, index) => {
+          return (
+            <div
+              key={index}
+              className="flex flex-col items-center my-4 border-t-2 border-slate-700"
             >
-              remove <MdDelete className="text-2xl" />
-            </button>
-            <div ref={divRef}></div>
-          </div>
-        );
-      })}
-      <Button onClick={addExercise}>Add exercise</Button>
+              <Input
+                label="Exercise's name"
+                onChange={(event) => handleChange(index, event)}
+                value={exercises.exerciseName}
+                type="text"
+                placeholder="Exercise's name"
+                name="exerciseName"
+              />
+              <NumberInput
+                label="Sets"
+                type="number"
+                name="sets"
+                onChange={(event) => handleChange(index, event)}
+                value={exercises.sets}
+                placeholder="Sets"
+              />
+              <NumberInput
+                label="Reps"
+                type="number"
+                value={exercises.reps}
+                onChange={(event) => handleChange(index, event)}
+                name="reps"
+                placeholder="Reps"
+              />
+              <button
+                className="mt-1 flex"
+                onClick={(e) => {
+                  e.preventDefault();
+                  removeExercise(index);
+                }}
+              >
+                remove <MdDelete className="text-2xl" />
+              </button>
+              <div ref={divRef}></div>
+            </div>
+          );
+        })}
+        <Button onClick={addExercise}>Add exercise</Button>
 
-      {exercises.length > 0 && <Button type="submit">SUBMIT WORKOUT</Button>}
-    </form>
+        {exercises.length > 0 && <Button type="submit">SUBMIT WORKOUT</Button>}
+      </form>
+    </SwipeTransition>
   );
 };

@@ -1,6 +1,6 @@
 import axios from "axios";
-const heroku = "http://localhost:5000";
-// "https://strongcoders.herokuapp.com";
+const heroku = "https://strongcoders.herokuapp.com";
+// "http://localhost:5000"
 export const API = axios.create({
   baseURL: heroku,
 });
