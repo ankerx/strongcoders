@@ -16,11 +16,11 @@ export default function AddPost() {
     name: "",
     desc: "",
     level: "easy",
-    username: user?.user?.name,
+    username: user?.name || user?.user?.name,
   });
 
   if (!formData.username) {
-    setFormData({ ...formData, username: user?.user?.name });
+    setFormData({ ...formData, username: user?.name || user?.user?.name });
   }
 
   const validate = (formData) => {

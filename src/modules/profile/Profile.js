@@ -12,9 +12,11 @@ import UserPost from "./UserPost";
 function Profile() {
   const { user } = useSelector((state) => ({ ...state.auth }));
   const { userPosts, loading } = useSelector((state) => ({ ...state.posts }));
-
+  console.log(user);
   const dispatch = useDispatch();
-  const userID = user?.user?._id;
+  const userID = user?.user?._id || user?._id;
+
+  console.log(userID);
   const handleDelete = (id) => {
     dispatch(deletePost(id));
     dispatch(removePost(id));
@@ -33,7 +35,7 @@ function Profile() {
     <Transition>
       <div className="text-center pt-20 pb-10 text-white min-h-screen	">
         <h2 className="my-5 text-xl">
-          Whaats's up{" "}
+          Whaats's up {user?.name}
           <span className="text-light-orange">{user && user?.user?.name}</span>!
         </h2>
         <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 ">

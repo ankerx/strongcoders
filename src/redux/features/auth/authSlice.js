@@ -35,6 +35,7 @@ export const registerUser = createAsyncThunk(
     try {
       const response = await api.registerUser(formData);
       toast.success("Account created!");
+      console.log(response);
       navigate("/");
       return response.data;
     } catch (error) {
