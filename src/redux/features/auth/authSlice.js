@@ -52,19 +52,7 @@ export const registerUser = createAsyncThunk(
 export const logoutUser = createAsyncThunk("auth/logout", async () => {
   localStorage.clear();
 });
-export const uploadImage = createAsyncThunk(
-  "auth/uploadImage",
-  async (userID, image) => {
-    try {
-      const response = await api.uploadImage(userID, { image });
-      console.log(userID);
-      console.log(image);
-      return response;
-    } catch (error) {
-      console.log(error);
-    }
-  }
-);
+
 export const authSlice = createSlice({
   name: "auth",
   initialState,

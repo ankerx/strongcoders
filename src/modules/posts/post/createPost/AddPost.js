@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Button from "../../../../components/Button";
 import { Transition } from "../../../../components/Transition";
@@ -6,7 +6,7 @@ import { stepOne } from "../../../../redux/features/posts/postsSlice";
 import { PostExercises } from "./PostExercises";
 import { PostInfo } from "./PostInfo";
 
-export const AddPost = () => {
+export default function AddPost() {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => ({ ...state.auth }));
   const [page, setPage] = useState(0);
@@ -74,4 +74,4 @@ export const AddPost = () => {
       </div>
     </Transition>
   );
-};
+}

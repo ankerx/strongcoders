@@ -24,7 +24,7 @@ function Users() {
                 key={user._id}
                 className="bg-dark-purple rounded-md p-8 text-white "
               >
-                <h3 className="text-light-orange">{user.name}</h3>
+                <h3 className="text-light-orange text-xl">{user.name}</h3>
                 <p>Created workouts: {user.createdPosts.length}</p>
                 <p>Collected likes:</p>
               </div>

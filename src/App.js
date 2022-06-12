@@ -5,7 +5,7 @@ import { setUser } from "./redux/features/auth/authSlice";
 import Navbar from "./components/Navbar";
 import { HashRouter } from "react-router-dom";
 import React, { useEffect } from "react";
-import AnimatedRoutes from "./components/AnimatedRoutes";
+import AnimatedRoutes from "./core/routes/AnimatedRoutes";
 
 function App() {
   const dispatch = useDispatch();
