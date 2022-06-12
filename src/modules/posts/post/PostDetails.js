@@ -48,7 +48,7 @@ function PostDetails() {
           {post &&
             post.exercises.map((item) => {
               return (
-                <tbody>
+                <tbody key={item._id}>
                   <tr className="border-b bg-gray-800 border-gray-700 hover:bg-gray-600 text-white">
                     <th
                       scope="row"

@@ -1,7 +1,7 @@
-import { Input } from "../../../../components/Input";
+import { useEffect } from "react";
 import { SwipeTransition } from "../../../../components/Transition";
 
-export const PostInfo = ({ setFormData, formData }) => {
+export const PostInfo = ({ setFormData, formData, errors }) => {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
@@ -9,7 +9,6 @@ export const PostInfo = ({ setFormData, formData }) => {
       [name]: value,
     });
   };
-  console.log(formData);
 
   return (
     <SwipeTransition>
@@ -18,13 +17,15 @@ export const PostInfo = ({ setFormData, formData }) => {
           Workout name
         </label>
         <input
-          className="shadow w-full appearance-none border-2 rounded  py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:ring-indigo-500 focus:border-indigo-500 md:text-lg  mb-4"
+          className="shadow w-full appearance-none border-2 rounded  py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:ring-indigo-500 focus:border-indigo-500 md:text-lg "
           type="text"
           placeholder="Workout name"
           name="name"
           onChange={handleChange}
           value={formData.name}
         />
+        <p className="text-red-500 mt-1 mb-4">{errors && errors.name}</p>
+
         <label className="text-gray-300 text-sm md:text-lg m-2 mb-1 font-bold">
           Workout level
         </label>
@@ -47,8 +48,9 @@ export const PostInfo = ({ setFormData, formData }) => {
           onChange={handleChange}
           value={formData.desc}
           name="desc"
-          className="shadow appearance-none border max-w-sm w-full rounded  py-3 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline m-1  focus:border-black"
+          className="shadow appearance-none border max-w-sm w-full rounded  py-3 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline  focus:border-black"
         />
+        <p className="text-red-500 mt-1 mb-4">{errors && errors.desc}</p>
       </form>
     </SwipeTransition>
   );

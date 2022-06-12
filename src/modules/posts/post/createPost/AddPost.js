@@ -5,11 +5,12 @@ import { Transition } from "../../../../components/Transition";
 import { stepOne } from "../../../../redux/features/posts/postsSlice";
 import { PostExercises } from "./PostExercises";
 import { PostInfo } from "./PostInfo";
+
 export const AddPost = () => {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => ({ ...state.auth }));
   const [page, setPage] = useState(0);
-  const [formErrors, setFormErrors] = useState();
+  const [formErrors, setFormErrors] = useState({});
   const formTitle = ["Create your workout", "Exercises"];
   const [formData, setFormData] = useState({
     name: "",
@@ -21,19 +22,29 @@ export const AddPost = () => {
   if (!formData.username) {
     setFormData({ ...formData, username: user?.user?.name });
   }
-  // const validate = (formData) => {
-  //   let errors = {};
-  //   if (!formData.name) {
-  //     errors.name = "Name is required";
-  //   }
-  //   if (formData.desc.length === 0) {
-  //     errors.password = "Description is required!";
-  //   }
-  //   return errors;
-  // };
-  // useEffect(() => {
-  //   setFormErrors(validate(formData));
-  // }, [formData]);
+
+  const validate = (formData) => {
+    let errors = {};
+    if (!formData.name) {
+      errors.name = "Name is required";
+    }
+    if (formData.desc.length === 0) {
+      errors.desc = "Description is required!";
+    }
+    return errors;
+  };
+  const handleSubmit = () => {
+    setFormErrors(validate(formData));
+    if (
+      page === 0 &&
+      formData.name.length !== 0 &&
+      formData.desc.length !== 0
+    ) {
+      dispatch(stepOne(formData));
+      setPage((prev) => prev + 1);
+    }
+  };
+
   return (
     <Transition>
       <div className="min-h-screen flex items-center justify-center">
@@ -41,7 +52,11 @@ export const AddPost = () => {
           <div className="text-center mt-14 ">
             <h1 className="text-xl">{formTitle[page]}</h1>
             {page === 0 ? (
-              <PostInfo formData={formData} setFormData={setFormData} />
+              <PostInfo
+                formData={formData}
+                setFormData={setFormData}
+                errors={formErrors}
+              />
             ) : (
               <PostExercises />
             )}
@@ -51,20 +66,9 @@ export const AddPost = () => {
             >
               Prev
             </Button>
-            <Button
-              disabled={page === 1}
-              onClick={() => {
-                if (page === 0) {
-                  dispatch(stepOne(formData));
-                  setPage((prev) => prev + 1);
-                }
-              }}
-            >
+            <Button disabled={page === 1} onClick={handleSubmit}>
               Next
             </Button>
-            {/* {formErrors.name && (
-            <p className="text-red-500 text-sm">{formErrors.name}</p>
-          )} */}
           </div>
         </div>
       </div>

@@ -1,4 +1,11 @@
-export const Input = ({ name, type, label, placeholder }) => {
+export const Input = ({
+  name,
+  type,
+  label,
+  placeholder,
+  handleChange,
+  value,
+}) => {
   return (
     <>
       <label className="block text-gray-300 text-md md:text-lg font-bold ">
@@ -9,8 +16,8 @@ export const Input = ({ name, type, label, placeholder }) => {
         type={type}
         placeholder={placeholder}
         name={name}
-        // onChange={props.onChange}
-        // value={props.value}
+        onChange={handleChange}
+        value={value}
       />
     </>
   );

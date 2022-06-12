@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { GoThumbsup } from "react-icons/go";
+import { motion } from "framer-motion";
 import { likePost } from "../../../redux/features/posts/postsSlice";
 function Post({ name, desc, id, likes, author, level }) {
   const { user } = useSelector((state) => ({ ...state.auth }));
@@ -34,9 +35,14 @@ function Post({ name, desc, id, likes, author, level }) {
             {like} {like === 1 ? "like" : "likes"}
           </p>
           {user && (
-            <button className="py-3 px-3 " onClick={() => handleLike(id)}>
+            <motion.button
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+              className="py-3 px-3 "
+              onClick={() => handleLike(id)}
+            >
               <GoThumbsup className="text-blue-500 text-xl hover:scale-125" />
-            </button>
+            </motion.button>
           )}
         </div>
         <p className="text-gray-400 ">
