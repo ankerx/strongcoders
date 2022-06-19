@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { SwipeTransition } from "../../../../components/Transition";
 
 export const PostInfo = ({ setFormData, formData, errors }) => {
@@ -30,7 +29,7 @@ export const PostInfo = ({ setFormData, formData, errors }) => {
           Workout level
         </label>
         <select
-          className="shadow appearance-none border  rounded  py-3 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline m-1 mb-3 focus:border-black"
+          className="shadow appearance-none border  rounded  py-3 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-3 focus:border-black"
           name="level"
           value={formData.level}
           onChange={handleChange}

@@ -10,7 +10,7 @@ import { Transition } from "../../../components/Transition";
 const schema = yup.object().shape({
   name: yup.string().min(3).max(12).required(),
   email: yup.string().email().required(),
-  password: yup.string().min(4).max(15).required(),
+  password: yup.string().min(6).required(),
 });
 function Form() {
   const {

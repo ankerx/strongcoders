@@ -6,6 +6,7 @@ import { createPost } from "../../../../redux/features/posts/postsSlice";
 import Button from "../../../../components/Button";
 import { NumberInput } from "../../components/NumberInput";
 import { SwipeTransition } from "../../../../components/Transition";
+import { toast } from "react-toastify";
 export const PostExercises = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -20,9 +21,8 @@ export const PostExercises = () => {
     }),
     []
   );
-
+  const [error, setError] = useState(false);
   const [exercises, setExercises] = useState([initialValues]);
-
   const handleChange = (index, event) => {
     setExercises((prev) => {
       return prev.map((item, i) => {
@@ -63,11 +63,21 @@ export const PostExercises = () => {
     ...post,
     exercises: [...exercises],
   };
+
   const onSubmit = (event) => {
     event.preventDefault();
-    console.log(exercises);
-    dispatch(createPost(object));
-    navigate("/");
+    exercises.map((item) => {
+      if (item.reps < 0 || item.sets < 0) {
+        setError(true);
+        toast.error("Sets & reps can't have a negative value");
+      } else {
+        setError(false);
+      }
+    });
+    if (!error) {
+      dispatch(createPost(object));
+      navigate("/");
+    }
   };
 
   return (
@@ -102,6 +112,7 @@ export const PostExercises = () => {
                 value={exercise.sets}
                 placeholder="Sets"
               />
+
               <NumberInput
                 label="Reps"
                 type="number"
