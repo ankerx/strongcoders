@@ -59,7 +59,7 @@ function Navbar() {
         </button>
         <ul
           className={`md:flex md:items-center md:pb-0 pb-12 absolute md:static text-white bg-black md:z-auto  left-0 w-full mt-5 sm:mt-0 md:w-auto md:pl-0 pl-9 transition-all duration-500 ease-in -z-10 ${
-            open ? "top-10" : "top-[-380px]"
+            open ? "top-10" : "top-[-340px]"
           }`}
         >
           <li
