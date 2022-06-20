@@ -15,7 +15,8 @@ function AllPosts() {
   if (loading) {
     return <Spinner />;
   }
-
+  const sum = (a) => (b) => a + b;
+  console.log(sum(1)(2));
   return (
     <div>
       <h3 className="text-gray-100 my-5 text-xl md:text-2xl">

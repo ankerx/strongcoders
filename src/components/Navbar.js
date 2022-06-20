@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { setLogout } from "../redux/features/auth/authSlice";
 import { setUser } from "../redux/features/auth/authSlice";
 import { useEffect, useState } from "react";
@@ -27,17 +27,15 @@ function Navbar() {
       text-gray-800"
         >
           <div className="w-20 md:w-24">
-            <Link to="/">
-              <img src={strong} />
+            <Link to="/" aria-label="home">
+              <img src={strong} alt="logo" />
             </Link>
           </div>
-          {/* <span className="text-2xl text-dark-orange mr-1 pt-2">
-            <Link to="/"> Strong Coders</Link>
-          </span> */}
         </div>
         <button
           className="flex cursor-pointer md:hidden  flex-col h-12 w-12 justify-center items-center group"
           onClick={() => setOpen(!open)}
+          aria-label="menu button"
         >
           <div
             className={`${genericHamburgerLine} ${

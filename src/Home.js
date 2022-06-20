@@ -58,7 +58,7 @@ function Home() {
                 <motion.button
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.9 }}
-                  className="bg-dark-orange  rounded-md px-4 py-2 md:px-7  md:py-3 xl:text-2xl text-white"
+                  className=" bg-dark-orange rounded-md px-4 py-2 md:px-7  md:py-3 xl:text-2xl text-white"
                 >
                   Add workout!
                 </motion.button>

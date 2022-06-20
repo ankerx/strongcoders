@@ -21,9 +21,9 @@ function Post({ name, desc, id, likes, author, level }) {
   };
   return (
     <div className="p-6 rounded-lg shadow-xl  bg-dark-purple my-4">
-      <h5 className="text-dark-orange text-xl leading-tight font-medium m-2">
+      <h3 className="text-dark-orange text-xl leading-tight font-medium m-2">
         {name}
-      </h5>
+      </h3>
       <p className="text-gray-400 ">level {level}</p>
       <p className="text-gray-300 text-base my-6">
         {desc.slice(0, 30)}... <Link to={`/workout/${id}`}>read more</Link>
