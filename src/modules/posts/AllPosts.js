@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getAllPosts } from "../../redux/features/posts/postsSlice";
-
 import Spinner from "../../components/Spinner";
 import Post from "./post/Post";
 function AllPosts() {
@@ -15,8 +14,7 @@ function AllPosts() {
   if (loading) {
     return <Spinner />;
   }
-  const sum = (a) => (b) => a + b;
-  console.log(sum(1)(2));
+
   return (
     <div>
       <h3 className="text-gray-100 my-5 text-xl md:text-2xl">

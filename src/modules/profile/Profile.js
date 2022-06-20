@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import Spinner from "../../components/Spinner";
@@ -8,15 +8,16 @@ import {
   deletePost,
   removePost,
 } from "../../redux/features/posts/postsSlice";
-import UserPost from "./UserPost";
-function Profile() {
+import { UserPost } from "./UserPost";
+
+export const Profile = () => {
+  const dispatch = useDispatch();
+
   const { user } = useSelector((state) => ({ ...state.auth }));
   const { userPosts, loading } = useSelector((state) => ({ ...state.posts }));
-  console.log(user);
-  const dispatch = useDispatch();
+
   const userID = user?.user?._id || user?._id;
 
-  console.log(userID);
   const handleDelete = (id) => {
     dispatch(deletePost(id));
     dispatch(removePost(id));
@@ -27,6 +28,7 @@ function Profile() {
       dispatch(getUserPosts(userID));
     }
   }, [dispatch, userID]);
+
   if (loading) {
     return <Spinner />;
   }
@@ -64,6 +66,4 @@ function Profile() {
       </div>
     </Transition>
   );
-}
-
-export default Profile;
+};

@@ -7,6 +7,7 @@ import Button from "../../../../components/Button";
 import { NumberInput } from "../../components/NumberInput";
 import { SwipeTransition } from "../../../../components/Transition";
 import { toast } from "react-toastify";
+
 export const PostExercises = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();

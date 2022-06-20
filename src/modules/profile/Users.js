@@ -5,12 +5,14 @@ import Spinner from "../../components/Spinner";
 import { Transition } from "../../components/Transition";
 import { getUsers } from "../../redux/features/posts/postsSlice";
 
-function Users() {
+export const Users = () => {
   const dispatch = useDispatch();
   const { users, loading } = useSelector((state) => ({ ...state.posts }));
+
   useEffect(() => {
     dispatch(getUsers());
   }, [dispatch]);
+
   if (loading) {
     return <Spinner />;
   }
@@ -37,6 +39,4 @@ function Users() {
       </div>
     </Transition>
   );
-}
-
-export default Users;
+};

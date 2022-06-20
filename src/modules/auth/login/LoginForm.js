@@ -11,10 +11,12 @@ const schema = yup.object().shape({
   email: yup.string().email().required(),
   password: yup.string().min(6).required(),
 });
-function Form() {
+export const LoginForm = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
   const { message } = useSelector((state) => ({ ...state.auth }));
+
   const {
     formState: { errors },
     register,
@@ -22,12 +24,12 @@ function Form() {
   } = useForm({
     resolver: yupResolver(schema),
   });
+
   useEffect(() => {
     message && toast.error(message);
   }, [message]);
 
   const onSubmit = (formData) => {
-    console.log(formData);
     dispatch(login({ formData, navigate, toast }));
   };
 
@@ -74,6 +76,4 @@ function Form() {
       </div>
     </Transition>
   );
-}
-
-export default Form;
+};

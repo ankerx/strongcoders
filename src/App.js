@@ -5,11 +5,12 @@ import { setUser } from "./redux/features/auth/authSlice";
 import Navbar from "./components/Navbar";
 import { HashRouter } from "react-router-dom";
 import React, { useEffect } from "react";
-import AnimatedRoutes from "./core/routes/AnimatedRoutes";
+import { AnimatedRoutes } from "./core/routes/AnimatedRoutes";
 
-function App() {
+export const App = () => {
   const dispatch = useDispatch();
   const user = JSON.parse(localStorage.getItem("profile"));
+
   useEffect(() => {
     dispatch(setUser(user));
   }, [dispatch, user]);
@@ -23,6 +24,4 @@ function App() {
       <ToastContainer autoClose={2000} />
     </HashRouter>
   );
-}
-
-export default App;
+};

@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-const UserPost = ({ name, desc, id, handleDelete, hideBtn }) => {
+export const UserPost = ({ name, desc, id, handleDelete, hideBtn }) => {
   return (
     <div className="p-6 rounded-lg shadow-xl bg-dark-purple m-5  ">
       <h5 className="text-white text-xl leading-tight font-medium mb-2">
@@ -23,5 +23,3 @@ const UserPost = ({ name, desc, id, handleDelete, hideBtn }) => {
     </div>
   );
 };
-
-export default UserPost;

@@ -4,18 +4,22 @@ import { useParams } from "react-router-dom";
 import Spinner from "../../components/Spinner";
 import { Transition } from "../../components/Transition";
 import { getUserPosts } from "../../redux/features/posts/postsSlice";
-import UserPost from "./UserPost";
+import { UserPost } from "./UserPost";
 
-const UserProfile = () => {
+export const UserProfile = () => {
+  const dispatch = useDispatch();
+
   const { id } = useParams();
   const { userPosts, loading } = useSelector((state) => ({ ...state.posts }));
-  const dispatch = useDispatch();
+
   const userID = id;
+
   useEffect(() => {
     if (userID) {
       dispatch(getUserPosts(userID));
     }
   }, [dispatch, userID]);
+
   if (loading) {
     return <Spinner />;
   }
@@ -41,5 +45,3 @@ const UserProfile = () => {
     </Transition>
   );
 };
-
-export default UserProfile;

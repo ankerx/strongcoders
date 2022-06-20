@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { Transition } from "../../../components/Transition";
 import { getPost } from "../../../redux/api";
 
-function PostDetails() {
+export const PostDetails = () => {
   const { id } = useParams();
   const [post, setPost] = useState();
 
@@ -71,6 +71,4 @@ function PostDetails() {
       </div>
     </Transition>
   );
-}
-
-export default PostDetails;
+};

@@ -9,18 +9,26 @@ import AllPosts from "./modules/posts/AllPosts";
 import useDebounce from "./core/hooks/useDebounce";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-function Home() {
-  const dispatch = useDispatch();
+import { SelectInput } from "./components/SelectInput";
+
+export const Home = () => {
+  const user = JSON.parse(localStorage.getItem("profile"));
+
   const [search, setSearch] = useState("");
   const [level, setLevel] = useState("all");
+
+  const dispatch = useDispatch();
+
   const handleChange = (e) => {
     setLevel(e.target.value);
   };
-  const user = JSON.parse(localStorage.getItem("profile"));
+
   const handleQuery = (e) => {
     setSearch(e.target.value);
   };
+
   const debouncedSearch = useDebounce(search, 400);
+
   useEffect(() => {
     if (level === "all" && search.length === 0) {
       dispatch(getAllPosts());
@@ -28,6 +36,7 @@ function Home() {
       dispatch(getPostsBySearch({ debouncedSearch, level }));
     }
   }, [level, dispatch, debouncedSearch]);
+
   return (
     <>
       <header className="flex flex-col text-center justify-center items-center overflow-x-hidden">
@@ -74,18 +83,7 @@ function Home() {
         </div>
       </header>
       <div className="flex flex-col xs:flex-row items-center mx-10 mt-5 ">
-        <label className="text-gray-300 ">Workouts level</label>
-        <select
-          className="shadow appearance-none border w-28 rounded  py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline  m-3 focus:border-black"
-          name="level"
-          onChange={(e) => handleChange(e)}
-        >
-          <option value="all">All</option>
-          <option value="easy">Easy</option>
-          <option value="medium">Medium</option>
-          <option value="hard">Hard</option>
-          <option value="pro">Pro</option>
-        </select>
+        <SelectInput handleChange={handleChange} />
         <input
           className="shadow appearance-none border rounded w-46 md:w-1/3 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline m-1  focus:border-black"
           placeholder="Search for workout"
@@ -98,6 +96,4 @@ function Home() {
       </section>
     </>
   );
-}
-
-export default Home;
+};

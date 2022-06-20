@@ -21,7 +21,7 @@ function Post({ name, desc, id, likes, author, level }) {
   };
   return (
     <div className="p-6 rounded-lg shadow-xl  bg-dark-purple my-4">
-      <h3 className="text-dark-orange text-xl leading-tight font-medium m-2">
+      <h3 className="text-light-orange text-xl leading-tight font-medium m-2">
         {name}
       </h3>
       <p className="text-gray-400 ">level {level}</p>
