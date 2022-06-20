@@ -21,7 +21,7 @@ function AllPosts() {
       <h3 className="text-gray-100 my-5 text-xl md:text-2xl">
         Workouts dashboard
       </h3>
-      <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3 mx-5">
+      <div className="grid grid-cols-1 gap-7 md:grid-cols-2 lg:grid-cols-3 ">
         {posts.length > 0 &&
           reversedArray.map((post) => {
             return (

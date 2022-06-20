@@ -11,6 +11,7 @@ export const NumberInput = (props) => {
         name={props.name}
         onChange={props.onChange}
         value={props.value}
+        onBlur={props.onBlur}
       />
     </>
   );

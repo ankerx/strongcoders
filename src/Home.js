@@ -73,7 +73,7 @@ function Home() {
           </motion.div>
         </div>
       </header>
-      <div className="flex flex-col xs:flex-row items-center mx-8 mt-5 ">
+      <div className="flex flex-col xs:flex-row items-center mx-10 mt-5 ">
         <label className="text-gray-300 ">Workouts level</label>
         <select
           className="shadow appearance-none border w-28 rounded  py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline  m-3 focus:border-black"
@@ -93,7 +93,7 @@ function Home() {
           onChange={(e) => handleQuery(e)}
         />
       </div>
-      <section className="min-h-[80vh] text-center mx-8">
+      <section className="min-h-[80vh] text-center mx-4 md:mx-10">
         <AllPosts />
       </section>
     </>

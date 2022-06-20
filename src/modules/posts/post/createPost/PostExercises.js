@@ -35,6 +35,14 @@ export const PostExercises = () => {
         };
       });
     });
+    exercises.map((item) => {
+      if (item.reps < 0 || item.sets < 0) {
+        setError(true);
+        // toast.error("Sets & reps can't have a negative value");
+      } else {
+        setError(false);
+      }
+    });
   };
 
   const addExercise = useCallback(
@@ -63,7 +71,7 @@ export const PostExercises = () => {
     ...post,
     exercises: [...exercises],
   };
-
+  console.log(error);
   const onSubmit = (event) => {
     event.preventDefault();
     exercises.map((item) => {
@@ -109,6 +117,7 @@ export const PostExercises = () => {
                 type="number"
                 name="sets"
                 onChange={(event) => handleChange(index, event)}
+                onBlur={() => exercise.sets < 0 && setError(true)}
                 value={exercise.sets}
                 placeholder="Sets"
               />
@@ -118,6 +127,7 @@ export const PostExercises = () => {
                 type="number"
                 value={exercise.reps}
                 onChange={(event) => handleChange(index, event)}
+                onBlur={() => exercise.reps < 0 && setError(true)}
                 name="reps"
                 placeholder="Reps"
               />

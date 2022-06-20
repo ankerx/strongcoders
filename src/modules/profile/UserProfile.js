@@ -22,7 +22,7 @@ const UserProfile = () => {
   return (
     <Transition>
       <div className="text-center pt-20 pb-10 text-white min-h-screen	">
-        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 ">
+        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 mx-10">
           {userPosts?.length > 0 &&
             userPosts?.map((post) => (
               <UserPost

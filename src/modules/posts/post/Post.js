@@ -20,7 +20,7 @@ function Post({ name, desc, id, likes, author, level }) {
     setLike(isLiked ? like - 1 : like + 1);
   };
   return (
-    <div className="p-6 rounded-lg shadow-xl  bg-dark-purple my-5 ">
+    <div className="p-6 rounded-lg shadow-xl  bg-dark-purple my-4">
       <h5 className="text-dark-orange text-xl leading-tight font-medium m-2">
         {name}
       </h5>
