@@ -12,6 +12,7 @@ import RedirectRoute from "./RedirectRoute";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { setUser } from "../../redux/features/auth/authSlice";
+import UserProfile from "../../modules/profile/UserProfile";
 function AnimatedRoutes() {
   const dispatch = useDispatch();
   const user = JSON.parse(localStorage.getItem("profile"));
@@ -51,6 +52,7 @@ function AnimatedRoutes() {
         />
         <Route path="/users" element={<Users />} />
         <Route path="/workout/:id" element={<PostDetails />} />
+        <Route path="/users/:id" element={<UserProfile />} />
       </Routes>
     </AnimatePresence>
   );

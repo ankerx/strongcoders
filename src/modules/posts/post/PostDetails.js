@@ -18,6 +18,7 @@ function PostDetails() {
   useEffect(() => {
     fetchPost();
   }, []);
+  console.log(post);
   return (
     <Transition>
       <div className="py-20 text-white min-h-screen flex flex-col items-center mx-4">
@@ -30,6 +31,7 @@ function PostDetails() {
             <h4 className="text-xl">
               Level: <span className="text-light-orange">{post.level}</span>
             </h4>
+            <p>{post.desc}</p>
           </div>
         )}
         <div className="relative overflow-x-auto shadow-md rounded-lg max-w-md md:max-w-2xl w-full m-4">
