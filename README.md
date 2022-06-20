@@ -2,7 +2,7 @@
 
 Fullstack application created to motivate programmers to work out more often by having the possibility to share their workouts with others.
 
-<img width="1440" alt="Zrzut ekranu 2022-06-20 o 22 34 11" src="https://user-images.githubusercontent.com/93661548/174674349-85bb7b30-00ef-4ec7-93f6-335fb5648be1.png">
+![strongcoders](https://user-images.githubusercontent.com/93661548/174674876-3fcd77f0-9a48-4351-b112-cd066e8e966a.png)
 
 See live here: https://strongcoders.netlify.app
 
