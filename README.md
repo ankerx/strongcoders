@@ -26,7 +26,7 @@ Logged-in users can create workouts, like/dislike other people's workouts, see t
 
 ## ⭐️ What did I learn
 
-This is the most comprehensive project that I have built. I learned a lot about working with API and how the frontend is connected to the backend. By using Redux I discovered how to manage the global state in the application, with working with bigger project I learned that folder structure is important.
+This is the most comprehensive project that I have built. I learned a lot about working with API and how the frontend is connected to the backend. By using Redux I discovered how to manage the global state in the application, while working with bigger project I learned that folder structure is important.
 
 ## 🤖 Why Strong Coders?
 
