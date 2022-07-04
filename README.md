@@ -22,7 +22,7 @@ Backend code available to see on https://github.com/ankerx/strongcoders-server
 
 ## 💻 Features
 
-Logged in users can create workouts, see their profile and delete their workouts. Each workout has a name, description, difficulty level, and exercise names with a number of sets and reps. Users can search workouts by name or by difficulty level.
+Logged-in users can create workouts, like/dislike other people's workouts, see their profile and delete their workouts. Each workout has a name, description, difficulty level, and exercise names with a number of sets and reps. Users can search workouts by name or by difficulty level. Pagination is also impelemented.
 
 ## ⭐️ What did I learn
 

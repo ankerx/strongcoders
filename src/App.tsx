@@ -9,7 +9,7 @@ import { AnimatedRoutes } from "./core/routes/AnimatedRoutes";
 
 export const App = () => {
   const dispatch = useDispatch();
-  const user = JSON.parse(localStorage.getItem("profile"));
+  const user = JSON.parse(localStorage.getItem("profile") || "");
 
   useEffect(() => {
     dispatch(setUser(user));

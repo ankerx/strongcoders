@@ -36,10 +36,9 @@ export const PostExercises = () => {
         };
       });
     });
-    exercises.map((item) => {
+    exercises.forEach((item) => {
       if (item.reps < 0 || item.sets < 0) {
         setError(true);
-        // toast.error("Sets & reps can't have a negative value");
       } else {
         setError(false);
       }
@@ -75,10 +74,9 @@ export const PostExercises = () => {
   console.log(error);
   const onSubmit = (event) => {
     event.preventDefault();
-    exercises.map((item) => {
+    exercises.forEach((item) => {
       if (item.reps < 0 || item.sets < 0) {
         setError(true);
-        toast.error("Sets & reps can't have a negative value");
       } else {
         setError(false);
       }
@@ -86,6 +84,8 @@ export const PostExercises = () => {
     if (!error) {
       dispatch(createPost(object));
       navigate("/");
+    } else {
+      toast.error("Sets & reps can't have a negative value");
     }
   };
 

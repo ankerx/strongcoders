@@ -1,5 +1,3 @@
-import { Transition } from "./Transition";
-
 function Spinner() {
   return (
     <div className="text-center h-100v pt-32">
