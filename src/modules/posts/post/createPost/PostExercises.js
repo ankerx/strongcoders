@@ -71,7 +71,7 @@ export const PostExercises = () => {
     ...post,
     exercises: [...exercises],
   };
-  console.log(error);
+
   const onSubmit = (event) => {
     event.preventDefault();
     exercises.forEach((item) => {

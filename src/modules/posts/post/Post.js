@@ -7,6 +7,7 @@ import { likePost } from "../../../redux/features/posts/postsSlice";
 function Post({ name, desc, id, likes, author, level }) {
   const { user } = useSelector((state) => ({ ...state.auth }));
   const dispatch = useDispatch();
+
   const [like, setLike] = useState(likes.length);
   const [isLiked, setIsLiked] = useState(false);
   const userID = user?.user?._id;
@@ -14,6 +15,7 @@ function Post({ name, desc, id, likes, author, level }) {
   useEffect(() => {
     setIsLiked(likes.includes(userID));
   }, [likes, userID]);
+
   const handleLike = (id) => {
     dispatch(likePost(id));
     setIsLiked(!isLiked);
